@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis Result</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #ff7e5f;
+            --accent: #ffb347;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: var(--gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: var(--dark);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .result-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .result-table th, .result-table td {
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .result-table th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .result-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .result-table tr:nth-child(odd) {
+            background-color: white;
+        }
+        
+        .sentiment-indicator {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .positive {
+            background-color: rgba(40, 167, 69, 0.15);
+            color: var(--success);
+        }
+        
+        .negative {
+            background-color: rgba(220, 53, 69, 0.15);
+            color: var(--danger);
+        }
+        
+        .neutral {
+            background-color: rgba(255, 193, 7, 0.15);
+            color: var(--warning);
+        }
+        
+        .btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .emojis {
+            text-align: center;
+            margin: 25px 0;
+            font-size: 40px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .footer a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">OptimalXAI</div>
+            <h2>Sentiment Analyzer Engine Output</h2>
+        </div>
+        
+        <div class="result-card">
+            <table class="result-table">
+                <tr>
+                    <th>Prediction Label</th>
+                    <th>Sentiment</th>
+                </tr>
+                <tr>
+                    <td>{{pred}}</td>
+                    <td>
+                        {{sent}}
+                        <div class="sentiment-indicator 
+                            {% if sent|lower == 'positive' %}positive
+                            {% elif sent|lower == 'negative' %}negative
+                            {% else %}neutral{% endif %}">
+                            {% if sent|lower == 'positive' %}😊 Positive
+                            {% elif sent|lower == 'negative' %}😞 Negative
+                            {% else %}😐 Neutral{% endif %}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="emojis">
+            <span>😊</span>
+            <span>😄</span>
+            <span>😍</span>
+            <span>😂</span>
+        </div>
+        
+        <button onclick="history.back()" class="btn">Go Back</button>
+        
+        <div class="footer">
+            <p><a href="https://optimalxai.com/">Visit SunrenkriXAI website for more details</a></p>
+        </div>
+    </div>
+</body>
+</html>
